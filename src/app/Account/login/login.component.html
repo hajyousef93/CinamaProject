@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="alert alert-danger alert-dismissible" *ngIf="this.message!=null && this.message!='' ">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>{{ this.message }}</strong> 
+  </div>
+      <div class="col-6 mt-4 mb-4 Register">
+          <h4>Login Page</h4>
+          <hr/>
+  
+          <!-- Form -->
+  
+          <form [formGroup]="userGroup" (ngSubmit)="Login()">
+              <!-- Email address -->
+  
+  
+              <div class="form-group">
+                <label for="Email">Email address</label>
+                <input type="email" formControlName="Email" class="form-control" id="Email" aria-describedby="emailHelp"placeholder="Email:"
+                [ngClass]="{'is-invalid':this.userGroup.get('Email').invalid && this.userGroup.get('Email').touched }">
+                
+                <div *ngIf="this.userGroup.get('Email').invalid && this.userGroup.get('Email').touched" class="invalid-feedback">
+                  <div *ngIf="this.userGroup.get('Email').errors.required">The Email is required</div>
+                  <div *ngIf="this.userGroup.get('Email').errors.email">Email must be  a valid email address</div>
+                </div>
+              </div>
+  
+  
+  
+              <!-- Password -->
+  
+              <div class="form-group">
+                <label for="Password">Password</label>
+                <input type="password"formControlName="Password" class="form-control" id="Password" placeholder="Password:"  
+                [ngClass]="{'is-invalid':this.userGroup.get('Password').invalid && this.userGroup.get('Password').touched }">
+  
+                <div class="invalid-feedback" *ngIf="this.userGroup.get('Password').invalid && this.userGroup.get('Password').touched">
+                  <div *ngIf="this.userGroup.get('Password').errors.required">The Password is required</div>
+                </div>
+              </div>
+                <!-- RememberMe -->
+                <div class="form-check mb-3">
+                    <label class="form-check-label">
+                      <input type="checkbox" formControlName="RememberMe" class="form-check-input" id=RememberMe  >RememberMe
+                    </label>
+                  </div>
+  
+                <!-- submit -->
+              <div class="row"> 
+                  <button type="submit" class="btn btn-primary col-2 ml-3" [disabled]="userGroup.invalid ">Login</button>
+                  <div class="btn-login col-6 mt-2"><a href="#" class=""> Forget your Password?</a></div>
+                  <div class="btn-login col-6 mt-2">Do not you hava account?<a href="Register" class=""> Register</a></div>
+              </div>  
+            </form>
+      </div>  
+    </div>
+  
