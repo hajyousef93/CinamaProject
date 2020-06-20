@@ -11,6 +11,9 @@ import { HomeComponent } from './home/home.component';
 import { FooterMenuComponent } from './footer-menu/footer-menu.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { RegisterconfirmComponent } from './Account/registerconfirm/registerconfirm.component';
+import { ForgetPasswordComponent } from './Account/forget-password/forget-password.component';
+import { PasswordConfirmComponent } from './Account/password-confirm/password-confirm.component';
 
 
 
@@ -22,7 +25,10 @@ import { HttpClientModule } from '@angular/common/http';
     NotFoundComponent,
     RegisterComponent,
     HomeComponent,
-    FooterMenuComponent
+    FooterMenuComponent,
+    RegisterconfirmComponent,
+    ForgetPasswordComponent,
+    PasswordConfirmComponent
    
     
   ],

@@ -18,6 +18,16 @@ export class LoginComponent implements OnInit {
   userGroup:FormGroup;
   logmodel:LoginModel;
   message:string;
+  messageValidet={
+    email:{
+      required:"The Email is required",
+      emailvalid:"Email must be  a valid email address"
+
+    },
+    passwprd:{
+      required:"The Password is required",
+    }
+  }
 
 
 
@@ -47,18 +57,13 @@ export class LoginComponent implements OnInit {
     {
       this.validateLoginModel();
       this.service.Login(this.logmodel).subscribe(success=>{
-
-        // 
        const email =this.userGroup.value.Email;
        const reMy=this.userGroup.value.RememberMe;
        this.auth.installStorage(reMy,email);
-        //
        this.route.navigate(['Home']);
-
-        //this.userGroup.reset();
       },
       err=>{
-        this.message=err.error;
+        this.message="Email or Password is wrong !!! try again";
         console.log(err.error)
         
       })

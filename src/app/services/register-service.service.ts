@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { User } from '../Models/user';
 import { LoginModel } from '../Models/lodin-model';
+import { ResetPassword } from '../Models/resetPassword';
 
 
 
@@ -43,5 +44,22 @@ export class RegisterServiceService {
     return this.http.get(this.Url+"Logout",{withCredentials:true}).pipe();
   }
 
+  EmailConfirm(id:string,token:string){
+    return this.http.get(this.Url+"ConfirmEmail?ID="+id+"&token="+token).pipe();
+  }
+  UserNameExist(username:string){
+    return this.http.get(this.Url+"UserNameExist?userName="+username).pipe();
+  }
+  EmailExist(email:string){
+    return this.http.get(this.Url+"EmailExist?email="+email).pipe();
+  }
+  ForgetPassword(email:string){
+    return this.http.get(this.Url+"ForgetPassword?email="+email).pipe();
+  }
+  ApiRestPassword(passmodel:ResetPassword):Observable<ResetPassword>{
+    return this.http.post<ResetPassword>(this.Url+"ResetPassword",passmodel,this.headers).pipe();
+  }
+
+  
   
 }

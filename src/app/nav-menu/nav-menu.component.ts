@@ -13,28 +13,32 @@ export class NavMenuComponent implements OnInit {
   constructor(private service:RegisterServiceService,private route:Router,private auth:AuthService) { }
   title = 'Cinama-Movies';
   ngOnInit(): void {
-    const email=localStorage.getItem('email');
-    const role=localStorage.getItem('role');
-    const expire=localStorage.getItem('expire');
-    if(email!=null&&role!=null&&expire!=null){
-      if(!!this.auth.checkStorage()){
-        
+    if(this.isUserRegistered()){
+      if(this.auth.IsExpiredDate(this.auth.expire)){
+         this.Logout();
+     }
+     this.auth.ValidetUser(this.auth.email,this.auth.role).subscribe(success=>{
+      console.log('UserAuthoriz');
+      },error=>{
+        console.log(error);
         this.Logout();
-      }
-  }
+      });
+    }
+    
   }
 
 
   Logout()
   {
-    this.service.LogoutUser().subscribe(success=>{  
+    this.service.LogoutUser().subscribe(succ=>{ 
       localStorage.clear();
-      this.route.navigate(["Home"]);
-     
+      console.log("authorize return false");
+      this.route.navigate(["/Home"]);
     },
     error=>{
       console.log(error);
     });
+    
   }
 
   isUserRegistered()

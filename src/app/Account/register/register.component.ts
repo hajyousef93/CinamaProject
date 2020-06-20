@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormBuilder, Validators } from "@angular/forms";
 import { RegisterModel } from 'src/app/Models/register-model';
 import { RegisterServiceService } from 'src/app/services/register-service.service';
-import { User } from 'src/app/Models/user';
+
 
 @Component({
   selector: 'app-register',
@@ -16,13 +16,42 @@ constructor(private fb:FormBuilder,private service:RegisterServiceService) {
  }
 userGroup:FormGroup;
 reg:RegisterModel;
-user:User[];
 message:string;
+isBusy:boolean;
+messageValidate={
+  userName:{
+    required:'The Name is Required',
+    UserNameExist:''
+  },
+  Email:{
+    required:"The Email is required",
+    email:"Email must be  a valid email address",
+    EmailExists:""
+  },
+  pass:{
+    required:"The Password is required",
+    minlength:"Password must be at leastet 6 characters"
+  },
+  Confirmpass:{
+    required:"The Password is required",
+    matched:"Password and Confirm Password must be match."
+  },
+  country:{
+    required:"The Country is required",
+    pattern:"Your Country name is error"
+   
+  },
+  phone:{
+    required:"The Phone is required",
+    pattern:"Your phone number has error Add Country Code ex:+961."
+   
+  }
+}
 
 
   ngOnInit(): void {
     this.message='';
-    this.user=[];
+    this.isBusy=false;
 
     // inti reg modle
     this.reg={
@@ -45,7 +74,13 @@ message:string;
         Phone:['',[Validators.required, Validators.pattern("[+]+[0-9]{12}")]]
       });
 
-      this.AllUser();
+    this.userGroup.valueChanges.subscribe(success=>{
+      if(this.userGroup.status=='VALID'){
+        console.log("form is Valid");
+        this.isBusy=true;
+      }
+        
+    },ex=>console.log(ex));
   }
 
 
@@ -54,7 +89,7 @@ message:string;
     {
       this.validateRegisterModel();
       this.service.Register(this.reg).subscribe(success=>{
-        this.message="Success Register Welcome "
+        this.message="Success Register Welcome but you need to Confirm Email "
 
         this.userGroup.reset();
       },erorr=>{
@@ -63,13 +98,7 @@ message:string;
     } 
   }
 
-  AllUser(){
-    this.service.GetAllUser().subscribe(list=>{
-      this.user=list;
-     // console.log(this.user);
-    },error=>alert(error.erorr)
-    );
-  }
+ 
 
   validateRegisterModel() {
    this.reg.UserName=this.userGroup.value.UserName;
@@ -92,18 +121,29 @@ isPasswordMatch()
       return false;
 }
 
-isUserNameExist(userName:string){
-    for(const name of this.user)
-    if(name.userName==userName){
+isUserNameExist(){
+  const userName=this.userGroup.value.UserName
+    if(userName!=null && userName!= ''&& this.isBusy===false){
+      this.service.UserNameExist(userName).subscribe(success=>{
+        this.messageValidate.userName.UserNameExist="The Name is Exist!!!";
+      },ex=>console.log(ex));
       return true;
-    } 
+    }
+    else{
+      this.messageValidate.userName.UserNameExist=null;
+    }
     return false;
   }
-isEmailExist(em:string){
-  for(const email of this.user)
-  if(email.email==em){
+isEmailExist(){
+  const em=this.userGroup.value.Email;
+  if(em!=null && em !=''&& this.isBusy===false){
+    this.service.EmailExist(em).subscribe(success=>{
+      this.messageValidate.Email.EmailExists="The Email  is Exist !!!";
+    },ex=>console.log(ex));
     return true;
-  } 
+  }else{
+    this.messageValidate.Email.EmailExists=null;
+  }
   return false;
 }
  

@@ -19,8 +19,8 @@
                 [ngClass]="{'is-invalid':this.userGroup.get('Email').invalid && this.userGroup.get('Email').touched }">
                 
                 <div *ngIf="this.userGroup.get('Email').invalid && this.userGroup.get('Email').touched" class="invalid-feedback">
-                  <div *ngIf="this.userGroup.get('Email').errors.required">The Email is required</div>
-                  <div *ngIf="this.userGroup.get('Email').errors.email">Email must be  a valid email address</div>
+                  <div *ngIf="this.userGroup.get('Email').errors.required">{{ this.messageValidet.email.required }}</div>
+                  <div *ngIf="this.userGroup.get('Email').errors.email">{{ this.messageValidet.email.emailvalid }}</div>
                 </div>
               </div>
   
@@ -34,7 +34,7 @@
                 [ngClass]="{'is-invalid':this.userGroup.get('Password').invalid && this.userGroup.get('Password').touched }">
   
                 <div class="invalid-feedback" *ngIf="this.userGroup.get('Password').invalid && this.userGroup.get('Password').touched">
-                  <div *ngIf="this.userGroup.get('Password').errors.required">The Password is required</div>
+                  <div *ngIf="this.userGroup.get('Password').errors.required">{{ this.messageValidet.passwprd.required }}</div>
                 </div>
               </div>
                 <!-- RememberMe -->
@@ -47,7 +47,7 @@
                 <!-- submit -->
               <div class="row"> 
                   <button type="submit" class="btn btn-primary col-2 ml-3" [disabled]="userGroup.invalid ">Login</button>
-                  <div class="btn-login col-6 mt-2"><a href="#" class=""> Forget your Password?</a></div>
+                  <div class="btn-login col-6 mt-2"><a href="ForgetPassword"> Forget your Password?</a></div>
                   <div class="btn-login col-6 mt-2">Do not you hava account?<a href="Register" class=""> Register</a></div>
               </div>  
             </form>

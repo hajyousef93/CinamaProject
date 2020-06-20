@@ -4,6 +4,9 @@ import { LoginComponent } from './Account/login/login.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { RegisterComponent } from './Account/register/register.component';
 import { HomeComponent } from './home/home.component';
+import { RegisterconfirmComponent } from './Account/registerconfirm/registerconfirm.component';
+import { ForgetPasswordComponent } from './Account/forget-password/forget-password.component';
+import { PasswordConfirmComponent } from './Account/password-confirm/password-confirm.component';
 
 
 
@@ -20,6 +23,16 @@ const routes: Routes = [
     pathMatch:"full"
   },
   {
+    path:"PasswordConfirm",
+    component:PasswordConfirmComponent,
+    pathMatch:"full"
+  },
+  {
+    path:"ForgetPassword",
+    component:ForgetPasswordComponent,
+    pathMatch:"full"
+  },
+  {
     path:"Login",
     component:LoginComponent,
     pathMatch:"full"
@@ -27,6 +40,11 @@ const routes: Routes = [
   {
     path:"Register",
     component:RegisterComponent,
+    pathMatch:"full"
+  },
+  {
+    path:"RegisterConfirm",
+    component:RegisterconfirmComponent,
     pathMatch:"full"
   },
   {
