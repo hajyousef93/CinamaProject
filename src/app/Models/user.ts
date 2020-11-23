@@ -1,10 +1,11 @@
 export class User {
+    id:string;
     userName:string;
     normalizedUserName:string;
     email:string;
     normalizedEmail:string;
     emailConfirmed:boolean;
-    passwordHashL:string;
+    passwordHash:string;
     securityStamp:string;
     concurrencyStamp:string;
     phoneNumber:string;

@@ -1,5 +1,6 @@
+
 <div class="container">
-  <div class="alert alert-danger alert-dismissible" *ngIf="this.message!=null && this.message!='' ">
+  <div class="alert alert-danger alert-dismissible" *ngIf="this.message!=null && this.message!=''">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
     <strong>{{ this.message }}</strong> 
   </div>
@@ -46,11 +47,23 @@
   
                 <!-- submit -->
               <div class="row"> 
-                  <button type="submit" class="btn btn-primary col-2 ml-3" [disabled]="userGroup.invalid ">Login</button>
+                  <button type="submit" class="btn btn-primary col-2 ml-3" [disabled]="userGroup.invalid " >Login</button>
                   <div class="btn-login col-6 mt-2"><a href="ForgetPassword"> Forget your Password?</a></div>
                   <div class="btn-login col-6 mt-2">Do not you hava account?<a href="Register" class=""> Register</a></div>
               </div>  
             </form>
       </div>  
+    </div>
+    <div class="text-center">
+      <circle-progress *ngIf="showSpinner "
+        [percent]="100"
+        [radius]="100"
+        [outerStrokeWidth]="16"
+        [innerStrokeWidth]="8"
+        [outerStrokeColor]="'#78C000'"
+        [innerStrokeColor]="'#C7E596'"
+        [animation]="true"
+        [animationDuration]="1000"
+      > </circle-progress>
     </div>
   

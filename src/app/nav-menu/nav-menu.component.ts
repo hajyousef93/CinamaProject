@@ -14,8 +14,9 @@ export class NavMenuComponent implements OnInit {
   title = 'Cinama-Movies';
   ngOnInit(): void {
     if(this.isUserRegistered()){
-      if(this.auth.IsExpiredDate(this.auth.expire)){
+      if(this.auth.IsExpiredDate(this.auth.expire)===true){
          this.Logout();
+         
      }
      this.auth.ValidetUser(this.auth.email,this.auth.role).subscribe(success=>{
       console.log('UserAuthoriz');
@@ -33,7 +34,7 @@ export class NavMenuComponent implements OnInit {
     this.service.LogoutUser().subscribe(succ=>{ 
       localStorage.clear();
       console.log("authorize return false");
-      this.route.navigate(["/Home"]);
+      this.route.navigate(['Home']);
     },
     error=>{
       console.log(error);
@@ -48,6 +49,13 @@ export class NavMenuComponent implements OnInit {
     const expire=!!localStorage.getItem('expire');
     if(email&&role&&expire){
     return true;
+    }
+    return false;
+  }
+
+  IsAdmin(){
+    if(this.auth.role.toLowerCase()==="admin" && this.isUserRegistered()){
+      return true;
     }
     return false;
   }

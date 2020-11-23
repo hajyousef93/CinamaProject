@@ -23,6 +23,7 @@
     "crypto-js": "^4.0.0",
     "font-awesome": "^4.7.0",
     "jquery": "^3.5.1",
+    "ng-circle-progress": "^1.5.1",
     "poper": "^0.1.1",
     "popper.js": "^1.16.0",
     "rxjs": "~6.5.4",

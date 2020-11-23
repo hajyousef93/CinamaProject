@@ -18,6 +18,8 @@ export class LoginComponent implements OnInit {
   userGroup:FormGroup;
   logmodel:LoginModel;
   message:string;
+  showSpinner=false;
+
   messageValidet={
     email:{
       required:"The Email is required",
@@ -55,15 +57,18 @@ export class LoginComponent implements OnInit {
   Login(){
     if(this.userGroup.valid)
     {
+      this.showSpinner=true;
       this.validateLoginModel();
       this.service.Login(this.logmodel).subscribe(success=>{
        const email =this.userGroup.value.Email;
        const reMy=this.userGroup.value.RememberMe;
        this.auth.installStorage(reMy,email);
+       this.showSpinner=false;
        this.route.navigate(['Home']);
       },
       err=>{
         this.message="Email or Password is wrong !!! try again";
+        this.showSpinner=false;
         console.log(err.error)
         
       })

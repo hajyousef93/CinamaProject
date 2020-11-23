@@ -18,6 +18,9 @@ userGroup:FormGroup;
 reg:RegisterModel;
 message:string;
 isBusy:boolean;
+
+showSpinner=false;
+
 messageValidate={
   userName:{
     required:'The Name is Required',
@@ -87,12 +90,14 @@ messageValidate={
   register(){
     if(this.userGroup.valid)
     {
+      this.showSpinner=true;
       this.validateRegisterModel();
       this.service.Register(this.reg).subscribe(success=>{
-        this.message="Success Register Welcome but you need to Confirm Email "
-
-        this.userGroup.reset();
+        this.message="Success Register Welcome but you need to Confirm Email ";
+         this.userGroup.reset();
+         this.showSpinner=false;
       },erorr=>{
+        this.showSpinner=false;
         console.log(erorr.erorr)
       })
     } 

@@ -7,6 +7,8 @@ import { HomeComponent } from './home/home.component';
 import { RegisterconfirmComponent } from './Account/registerconfirm/registerconfirm.component';
 import { ForgetPasswordComponent } from './Account/forget-password/forget-password.component';
 import { PasswordConfirmComponent } from './Account/password-confirm/password-confirm.component';
+import { DashboardComponent } from './Admin/dashboard/dashboard.component';
+import { AddUserComponent } from './Admin/add-user/add-user.component';
 
 
 
@@ -15,6 +17,21 @@ const routes: Routes = [
   {
     path:"",
     redirectTo:"",
+    pathMatch:"full"
+  },
+  {
+    path:"ControlPanal",
+    component:DashboardComponent,
+    pathMatch:"full"
+  },
+  {
+    path:"AddUser",
+    component:AddUserComponent,
+    pathMatch:"full"
+  },
+  {
+    path:"EditUser/:id",
+    component:AddUserComponent,
     pathMatch:"full"
   },
   {

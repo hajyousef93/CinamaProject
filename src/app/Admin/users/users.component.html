@@ -1,0 +1,70 @@
+<div class="text-center">
+    <circle-progress *ngIf="showSpinner"
+  [percent]="100"
+  [radius]="100"
+  [outerStrokeWidth]="16"
+  [innerStrokeWidth]="8"
+  [outerStrokeColor]="'#78C000'"
+  [innerStrokeColor]="'#C7E596'"
+  [animation]="true"
+  [animationDuration]="10000"
+></circle-progress>
+</div>
+
+<div class="">
+
+   <div>
+       <table id="tbl" class="table table-response" *ngIf="!showSpinner">
+           <thead>
+               <tr class="bg-dark text-light">
+                   <th>User Name</th>
+                   <th>Email</th>
+                   <th>Phone</th>
+                   <th>Country</th>
+                   <th></th>
+                   <th><input type ="checkbox" class="ckheader" (change)="SelectAll()"></th>
+               </tr>
+           </thead>
+           <tbody>
+               <tr *ngFor="let user of users">
+                   <td scope="row">{{ user.userName }}</td>
+                   <td>{{ user.email }}</td>
+                   <td>{{ user.phoneNumber }}</td>
+                   <td>{{ user.country }}</td>
+                   <td>
+                       <div><button type="button" (click)="EditUser(user.id)" class="btn btn-danger btn-sm">Edit</button></div>
+                    </td>
+                   <td>
+                       <input type ="checkbox" class="ckitem" value="{{user.id}}" >
+                    </td>
+               </tr>
+           </tbody>
+       </table>
+   </div>
+   <div >
+       <!-- Button trigger modal -->
+    <button type="button" class="btn btn-danger " data-toggle="modal" data-target="#modelId"[disabled]="!IsDelete()" (click)="DeleteCount()">
+        Delete
+     </button>
+   </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Warning Delelte</h5>
+                   
+            </div>
+            <div class="modal-body">
+                Are you sure Delete {{numItemDelete}} Item..!! 
+            </div>
+            <div class="modal-footer">
+                <button id="butClose" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" (click)="ConfirmDelete()">Confirm Delelte</button>
+            </div>
+        </div>
+    </div>
+</div>

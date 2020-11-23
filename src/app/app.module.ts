@@ -14,6 +14,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { RegisterconfirmComponent } from './Account/registerconfirm/registerconfirm.component';
 import { ForgetPasswordComponent } from './Account/forget-password/forget-password.component';
 import { PasswordConfirmComponent } from './Account/password-confirm/password-confirm.component';
+import { DashboardComponent } from './Admin/dashboard/dashboard.component';
+import { UsersComponent } from './Admin/users/users.component';
+import { AddUserComponent } from './Admin/add-user/add-user.component';
+import { NgCircleProgressModule } from 'ng-circle-progress';
 
 
 
@@ -28,7 +32,10 @@ import { PasswordConfirmComponent } from './Account/password-confirm/password-co
     FooterMenuComponent,
     RegisterconfirmComponent,
     ForgetPasswordComponent,
-    PasswordConfirmComponent
+    PasswordConfirmComponent,
+    DashboardComponent,
+    UsersComponent,
+    AddUserComponent
    
     
   ],
@@ -37,6 +44,15 @@ import { PasswordConfirmComponent } from './Account/password-confirm/password-co
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgCircleProgressModule.forRoot({
+      // set defaults here
+      radius: 100,
+      outerStrokeWidth: 16,
+      innerStrokeWidth: 8,
+      outerStrokeColor: "#78C000",
+      innerStrokeColor: "#C7E596",
+      animationDuration: 300,
+    })
     
   ],
   providers: [],

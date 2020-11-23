@@ -1,0 +1,118 @@
+<div class="container">
+    <div class="alert alert-success alert-dismissible" *ngIf="this.message!=null && this.message!='' ">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>{{ this.message }}</strong> 
+    </div>
+    <div class="alert alert-danger alert-dismissible" *ngIf="this.errorMsg!=null && this.errorMsg!='' ">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>{{ this.errorMsg }}</strong> 
+    </div>
+      <div class="col-6 mt-4 mb-4 Register">
+          <h4>{{ title}}</h4>
+          <hr/>
+  
+          <!-- Form -->
+  
+          <form [formGroup]="userGroup" (ngSubmit)="AddUser()">
+              <!-- UserName -->
+            <div class="form-group">
+                  <label for="UserName">UserName</label>
+                  <input type="text" formControlName="UserName" class="form-control" id="UserName" placeholder="Your Full Name"
+                  [ngClass]="{'is-invalid':!this.userGroup.get('UserName').valid && this.userGroup.get('UserName').touched}" >
+                
+                  <div class="invalid-feedback" *ngIf="!this.userGroup.get('UserName').valid && this.userGroup.get('UserName').touched">
+                    {{ this.messageValidate.userName.required }}
+                  </div>
+                  <div class="text-danger" *ngIf="this.userGroup.get('UserName').value!==null && this.userGroup.get('UserName').value!=='' && isUserNameExist()">
+                    {{ this.messageValidate.userName.UserNameExist }}
+                  </div>
+              </div>
+              
+  
+  
+             
+                  <!-- Email address -->
+  
+  
+              <div class="form-group ">
+                <label for="Email">Email address</label>
+                <input type="email" formControlName="Email" class="form-control" id="Email" aria-describedby="emailHelp"placeholder="Email:"
+                [ngClass]="{'is-invalid':this.userGroup.get('Email').invalid && this.userGroup.get('Email').touched }" >
+                
+                <div *ngIf="this.userGroup.get('Email').invalid && this.userGroup.get('Email').touched" class="invalid-feedback">
+                  <div *ngIf="this.userGroup.get('Email').errors.required">{{ this.messageValidate.Email.required }}</div>
+                  <div *ngIf="this.userGroup.get('Email').errors.email">{{ this.messageValidate.Email.email }}</div>
+                </div>
+                <div class="text-danger" *ngIf="this.userGroup.get('Email').value!==null && this.userGroup.get('Email').value!=='' && this.isEmailExist()" >
+                  {{ this.messageValidate.Email.EmailExists }}
+                </div>
+              </div>
+
+              <!-- EmailConfirm -->
+
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox"  formControlName="EmailConfirmed" id=EmailConfirmed checked> Confirm Email</label>
+              </div>
+
+              <!-- password -->
+             <div class="row">
+                  <!-- Password -->
+  
+              <div class="form-group col">
+                <label for="Password">Password</label>
+                <input type="password"formControlName="Password" class="form-control" id="Password" placeholder="Password:"  
+                [ngClass]="{'is-invalid':this.userGroup.get('Password').invalid && this.userGroup.get('Password').touched }">
+  
+                <div class="invalid-feedback" *ngIf="this.userGroup.get('Password').invalid && this.userGroup.get('Password').touched">
+                  <div *ngIf="this.userGroup.get('Password').errors.required">{{ this.messageValidate.pass.required }}</div>
+                  <div *ngIf="this.userGroup.get('Password').errors.minlength">{{ this.messageValidate.pass.minlength }}  </div>
+                </div>
+              </div>
+  
+              <!-- ConfirmPassword -->
+              <div class="form-group col">
+                  <label for="ConfirmPassword">Confirm Password</label>
+                  <input type="password" class="form-control" id="ConfirmPassword" formControlName="ConfirmPassword" placeholder="ConfirmPassword:"
+                  [ngClass]="{'is-invalid':this.userGroup.get('ConfirmPassword').invalid && this.userGroup.get('ConfirmPassword').touched }"> 
+  
+                  <div *ngIf="this.userGroup.get('ConfirmPassword').invalid && this.userGroup.get('ConfirmPassword').touched " class="invalid-feedback">
+                    <div *ngIf="this.userGroup.get('ConfirmPassword').errors.required">Password is required.</div>
+                  </div>
+                  <div *ngIf="isPasswordMatch()" class="text-danger" >{{ this.messageValidate.Confirmpass.matched }}</div>
+              </div>
+             </div>
+  
+              <!-- Country -->
+              <div class="form-group">
+                  <label for="Country">Country</label>
+                  <input type="text"  formControlName="Country" class="form-control" id="Country" placeholder="Your Country"
+                  [ngClass]="{'is-invalid':this.userGroup.get('Country').invalid && this.userGroup.get('Country').touched }">
+  
+                  <div *ngIf="this.userGroup.get('Country').invalid && this.userGroup.get('Country').touched " class="invalid-feedback">
+                    <div *ngIf="this.userGroup.get('Country').errors.pattern">{{ this.messageValidate.country.pattern }} </div>
+                    <div *ngIf="this.userGroup.get('Country').errors.required">{{ this.messageValidate.country.required }}</div></div>
+              </div>
+  
+              <!-- Phone -->
+                <div class="form-group">
+                  <label for="Phone">Phone</label>
+                  <input type="tel" formControlName="Phone" class="form-control" id="Phone" placeholder="Your Phone Number" 
+                  [ngClass]="{'is-invalid':this.userGroup.get('Phone').invalid && this.userGroup.get('Phone').touched }">
+  
+                  <div *ngIf="this.userGroup.get('Phone').invalid && this.userGroup.get('Phone').touched " class="invalid-feedback">
+
+                    <div *ngIf="this.userGroup.get('Phone').errors.required">{{ this.messageValidate.phone.required }}</div>
+                  </div>
+                </div>
+  
+                <!-- submit -->
+              <div class="row"> 
+                  <button type="submit" class="btn btn-primary col-3 ml-3" [disabled]="userGroup.invalid ||isPasswordMatch()|| this.isEmailExist()||this.isUserNameExist()">{{btnTitle}}</button>
+                  
+              </div>  
+            </form>
+      </div>  
+    </div>
+  
+  
